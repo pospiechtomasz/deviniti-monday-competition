@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wyświetlanie wartości Instals z pliku JSON</title>
+  <style>
+    body {
+      background-color: black;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+	#jsonOutput {
+	
+	font-size: 26vw;
+	}
+    .installs-container {
+      color: white;
+      font-size: 5vw;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .installs-container {
+        font-size: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="installs-container">
+    Itemplate Wizard instals:<br><span id="jsonOutput"></span>
+  </div>
+
+  <script>
+    const jsonUrl = 'https://simplescraper.io/api/lXeupJu6MmCmoikYSi0P?apikey=7mKCPzmFybjUrlxUnJB2mAso4jwWrQYt&limit=100';
+
+    function fetchData() {
+      fetch(jsonUrl)
+        .then(response => response.json())
+        .then(data => {
+          const installs = data.data[0].Instals;
+          const jsonOutputElement = document.getElementById('jsonOutput');
+          jsonOutputElement.textContent =  installs;
+        })
+        .catch(error => {
+          console.error('Wystąpił błąd podczas pobierania danych:', error);
+        });
+    }
+
+    fetchData();
+  </script>
+</body>
+</html>
